@@ -1,0 +1,13 @@
+import http.client
+import json
+
+conn = http.client.HTTPSConnection("3ad4b2-00.myshopify.com")
+payload = "curl -X POST \\\r\n  /token \\\r\n  -H 'content-type: application/x-www-form-urlencoded' \\\r\n  -d 'merchant_id=<21648>&grant_type=client_credentials&secured_key=<EzW3qVqxymLuts0eoGxfcSHdR>'\r\n  {\r\n    \"token\": \"<token>\",\r\n    \"refresh_token\": \"<refresh token>\",\r\n    \"code\": \"\",\r\n    \"message\": null,\r\n    \"expiry\": <no.ofseconds>\r\n}"
+headers = {
+  'X-Shopify-Access-Token': '{access_token}',
+  'Content-Type': 'application/json'
+}
+conn.request("POST", "/admin/api/unstable/shopify_payments/balance/transactions.json?merchant_id%09=Yes&secured_key=Yes&grant_type=Yes&customer_ip=Yes&reserved_1=Conditional&reserved_2=Conditional&reserved_3=Conditional&api_version=No", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))
